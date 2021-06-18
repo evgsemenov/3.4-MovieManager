@@ -1,10 +1,13 @@
 import domain.ShowMovies;
+import lombok.Data;
 import manager.MovieManager;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
 public class MovieManagerTest {
-    private MovieManager manager = new MovieManager();
-//    int addByMovieId = 84525;
+    //    int addByMovieId = 84525;
     private ShowMovies movie1 = new ShowMovies(1, 100500, "Бладшот", "боевик", "poster100500.jpg", false);
     private ShowMovies movie2 = new ShowMovies(2, 35584, "Вперед", "мультфильм", "poster35584.jpg", false);
     private ShowMovies movie3 = new ShowMovies(3, 158975, "Отель «Белград»", "комедия", "Poster158975", false);
@@ -15,10 +18,21 @@ public class MovieManagerTest {
 
     @Test
     void shouldAddMovieIfNoMovies() {
+        MovieManager manager = new MovieManager();
         manager.addMovie(movie5);
         ShowMovies[] actual = manager.showLatest();
         ShowMovies[] expected = new ShowMovies[]{movie5};
         assertArrayEquals(expected, actual);
     }
+
+    @Test
+    void shouldAddMovieIfOneMovie() {
+        MovieManager manager = new MovieManager();
+        manager.addMovie(movie7);
+        ShowMovies[] actual = manager.showLatest();
+        ShowMovies[] expected = new ShowMovies[]{movie7, movie3};
+        assertArrayEquals(expected, actual);
+    }
+
 
 }
