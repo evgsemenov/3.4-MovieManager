@@ -1,18 +1,20 @@
 package manager;
 
-import domain.ShowMovies;
+import domain.ShowMoviesInfo;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 
 public class MovieManager {
     int maxLength = 10;
 
-    private ShowMovies[] movies = new ShowMovies[0];
+    private ShowMoviesInfo[] movies = new ShowMoviesInfo[0];
 
-    public void addMovie(ShowMovies movie) {
+    public void addMovie(ShowMoviesInfo movie) {
         int resultLength = movies.length + 1;
-        ShowMovies[] tmp = new ShowMovies[resultLength];
+        ShowMoviesInfo[] tmp = new ShowMoviesInfo[resultLength];
         System.arraycopy(movies, 0, tmp, 0, movies.length);
         int lastIndex = tmp.length - 1;
         tmp[lastIndex] = movie;
@@ -27,18 +29,21 @@ public class MovieManager {
         return maxLength;
     }
 
-    public ShowMovies[] showLatest() {
-        maxLength = setMaxLength(10);
+    public ShowMoviesInfo[] showLatest() {
         int resultLength;
         if (movies.length > maxLength) {
             resultLength = maxLength;
         } else
             resultLength = movies.length;
-        ShowMovies[] result = new ShowMovies[resultLength];
+        ShowMoviesInfo[] result = new ShowMoviesInfo[resultLength];
         for (int i = 0; i < resultLength; i++) {
             int index = movies.length - i - 1;
             result[i] = movies[index];
         }
         return result;
+    }
+
+    public MovieManager(int maxLength) {
+        this.maxLength = maxLength;
     }
 }
