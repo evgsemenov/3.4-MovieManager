@@ -1,14 +1,14 @@
-package manager;
+package repository;
 
 import domain.ShowMoviesInfo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class MovieManagerNonEmptyTest {
-    private MovieManager manager = new MovieManager();
+
+public class AfishaRepositoryWithSetupManyMoviesTest {
+    private AfishaRepository repository = new AfishaRepository();
     private ShowMoviesInfo movie1 = new ShowMoviesInfo(1, 100500, "Бладшот", "боевик", "poster100500.jpg", false);
     private ShowMoviesInfo movie2 = new ShowMoviesInfo(2, 35584, "Вперед", "мультфильм", "poster35584.jpg", false);
     private ShowMoviesInfo movie3 = new ShowMoviesInfo(3, 158975, "Отель «Белград»", "комедия", "Poster158975", false);
@@ -22,32 +22,49 @@ public class MovieManagerNonEmptyTest {
     private ShowMoviesInfo movie11 = new ShowMoviesInfo(11, 24852, "Гнев человеческий", "боевик", "Poster24852", true);
 
     @BeforeEach
-    public void setup() {
-        manager.addMovie(movie1);
-        manager.addMovie(movie2);
-        manager.addMovie(movie3);
-        manager.addMovie(movie4);
-        manager.addMovie(movie5);
+    public void setupManyMovies() {
+        repository.save(movie1);
+        repository.save(movie2);
+        repository.save(movie3);
+        repository.save(movie4);
+        repository.save(movie5);
+        repository.save(movie6);
+        repository.save(movie7);
+        repository.save(movie8);
+        repository.save(movie9);
+        repository.save(movie10);
     }
 
     @Test
     public void shouldAddMovieIfManyMovies() {
-        manager.addMovie(movie6);
-        ShowMoviesInfo[] actual = manager.showLatest();
-        ShowMoviesInfo[] expected = new ShowMoviesInfo[]{movie6, movie5, movie4, movie3, movie2, movie1};
+        repository.save(movie11);
+        ShowMoviesInfo[] actual = repository.getMovies();
+        ShowMoviesInfo[] expected = new ShowMoviesInfo[]{movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8, movie9, movie10, movie11};
         assertArrayEquals(expected, actual);
     }
 
     @Test
-    public void shouldSetMoviesLengthToDefault() {
-        manager.addMovie(movie6);
-        manager.addMovie(movie7);
-        manager.addMovie(movie8);
-        manager.addMovie(movie9);
-        manager.addMovie(movie10);
-        manager.addMovie(movie11);
-        ShowMoviesInfo[] actual = manager.showLatest();
-        ShowMoviesInfo[] expected = new ShowMoviesInfo[]{movie11, movie10, movie9, movie8, movie7, movie6, movie5, movie4, movie3, movie2};
+    public void shouldRemoveByIdIfManyMovies() {
+        repository.removeById(6);
+        ShowMoviesInfo[] actual = repository.getMovies();
+        ShowMoviesInfo[] expected = new ShowMoviesInfo[]{movie1, movie2, movie3, movie4, movie5, movie7, movie8, movie9, movie10};
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void shouldFindAllMoviesIfManyMovies() {
+        ShowMoviesInfo[] actual = repository.findAll();
+        ShowMoviesInfo[] expected = new ShowMoviesInfo[]{movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8, movie9, movie10};
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void shouldRemoveAllIfManyMovies() {
+        repository.removeAll();
+        ShowMoviesInfo[] actual = repository.getMovies();
+        ShowMoviesInfo[] expected = new ShowMoviesInfo[]{};
         assertArrayEquals(expected, actual);
     }
 }
+
+

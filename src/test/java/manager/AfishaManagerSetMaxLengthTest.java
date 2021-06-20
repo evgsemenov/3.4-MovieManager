@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SetMaxLengthTest {
-    MovieManager manager = new MovieManager();
+    AfishaManager manager = new AfishaManager();
 
     @Test
     public void setMaxLengthUnderZero() {
