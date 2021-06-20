@@ -33,8 +33,9 @@ public class MovieManager {
         int resultLength;
         if (movies.length > maxLength) {
             resultLength = maxLength;
-        } else
+        } else {
             resultLength = movies.length;
+        }
         ShowMoviesInfo[] result = new ShowMoviesInfo[resultLength];
         for (int i = 0; i < resultLength; i++) {
             int index = movies.length - i - 1;
