@@ -3,22 +3,21 @@ package manager;
 import domain.ShowMoviesInfo;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import repository.AfishaRepository;
 
 @Data
 @NoArgsConstructor
 
-public class MovieManager {
+public class AfishaManager {
     int maxLength = 10;
+    private AfishaRepository repository;
 
-    private ShowMoviesInfo[] movies = new ShowMoviesInfo[0];
+    public AfishaManager(AfishaRepository repository) {
+        this.repository = repository;
+    }
 
-    public void addMovie(ShowMoviesInfo movie) {
-        int resultLength = movies.length + 1;
-        ShowMoviesInfo[] tmp = new ShowMoviesInfo[resultLength];
-        System.arraycopy(movies, 0, tmp, 0, movies.length);
-        int lastIndex = tmp.length - 1;
-        tmp[lastIndex] = movie;
-        movies = tmp;
+    public AfishaManager(int maxLength) {
+        this.maxLength = maxLength;
     }
 
     public int setMaxLength(int newMaxLength) {
@@ -29,7 +28,8 @@ public class MovieManager {
         return maxLength;
     }
 
-    public ShowMoviesInfo[] showLatest() {
+    public ShowMoviesInfo[] findAll() {
+        ShowMoviesInfo[] movies = repository.findAll();
         int resultLength;
         if (movies.length > maxLength) {
             resultLength = maxLength;
@@ -44,7 +44,16 @@ public class MovieManager {
         return result;
     }
 
-    public MovieManager(int maxLength) {
-        this.maxLength = maxLength;
+    public void save(ShowMoviesInfo movie) {
+        repository.save(movie);
+    }
+
+    public void removeById(int id) {
+        repository.removeById(id);
+    }
+
+    public void removeAll() {
+        repository.removeAll();
     }
 }
+
