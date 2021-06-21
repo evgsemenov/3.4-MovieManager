@@ -65,6 +65,14 @@ public class AfishaRepositoryWithSetupManyMoviesTest {
         ShowMoviesInfo[] expected = new ShowMoviesInfo[]{};
         assertArrayEquals(expected, actual);
     }
+
+//    @Test
+//    shouldFindNoExistByIdIfManyMovies() {
+//        ShowMoviesInfo actual = repository.findById(5);
+//        ShowMoviesInfo expected = movie5;
+//        assertEquals(expected, actual);
+//    }
+
 }
 
 

@@ -36,14 +36,14 @@ public class AfishaRepository {
         }
     }
 
-//    public ShowMoviesInfo[] findById(int id) {
-//        for (ShowMoviesInfo movie : movies) {
-//            if (movie.getId() == id) {
-//                return movie;
-//            }
-//        }
-//        return null;
-//    }
+    public ShowMoviesInfo findById(int id) {
+        for (ShowMoviesInfo movie : movies) {
+            if (movie.getId() == id) {
+                return movie;
+            }
+        }
+        return null;
+    }
 
     public void removeAll() {
         movies = new ShowMoviesInfo[0];

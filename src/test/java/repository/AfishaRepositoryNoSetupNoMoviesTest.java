@@ -42,11 +42,11 @@ class AfishaRepositoryNoSetupNoMoviesTest {
         ShowMoviesInfo[] expected = new ShowMoviesInfo[]{};
         assertArrayEquals(expected, actual);
     }
-    @Test
-    void removeById() {
-    }
+//
+//    @Test shouldFindNoExistByIdIfNoMovies(){
+//        ShowMoviesInfo actual = repository.findById(5);
+//        ShowMoviesInfo expected = movie5;
+//        assertEquals(expected, actual);
+//    }
 
-    @Test
-    void removeAll() {
-    }
 }

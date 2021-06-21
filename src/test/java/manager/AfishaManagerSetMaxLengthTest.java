@@ -15,6 +15,7 @@ class AfishaManagerSetMaxLengthTest {
         int actual = manager.getMaxLength();
         assertEquals(expected, actual);
     }
+
     @Test
     public void setMaxLengthZero() {
         int userMaxLength = 0;
@@ -23,6 +24,7 @@ class AfishaManagerSetMaxLengthTest {
         int actual = manager.getMaxLength();
         assertEquals(expected, actual);
     }
+
     @Test
     public void setMaxLengthOverZero() {
         int userMaxLength = 1;
@@ -31,6 +33,7 @@ class AfishaManagerSetMaxLengthTest {
         int actual = manager.getMaxLength();
         assertEquals(expected, actual);
     }
+
     @Test
     public void setMaxLengthRandom() {
         int userMaxLength = 13;
@@ -39,7 +42,4 @@ class AfishaManagerSetMaxLengthTest {
         int actual = manager.getMaxLength();
         assertEquals(expected, actual);
     }
-
-
 }
-

@@ -20,11 +20,12 @@ public class AfishaManager {
         this.maxLength = maxLength;
     }
 
-    public int setMaxLength(int newMaxLength) {
-        if (newMaxLength < 0) {
+    public int setMaxLength(int userMaxLength) {
+        if (userMaxLength < 0) {
             return maxLength;
+        } else {
+            maxLength = userMaxLength;
         }
-        maxLength = newMaxLength;
         return maxLength;
     }
 
