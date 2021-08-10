@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SetMaxLengthTest {
-    MovieManager manager = new MovieManager();
+class AfishaManagerSetMaxLengthTest {
+    AfishaManager manager = new AfishaManager();
 
     @Test
     public void setMaxLengthUnderZero() {
@@ -15,6 +15,7 @@ class SetMaxLengthTest {
         int actual = manager.getMaxLength();
         assertEquals(expected, actual);
     }
+
     @Test
     public void setMaxLengthZero() {
         int userMaxLength = 0;
@@ -23,6 +24,7 @@ class SetMaxLengthTest {
         int actual = manager.getMaxLength();
         assertEquals(expected, actual);
     }
+
     @Test
     public void setMaxLengthOverZero() {
         int userMaxLength = 1;
@@ -31,6 +33,7 @@ class SetMaxLengthTest {
         int actual = manager.getMaxLength();
         assertEquals(expected, actual);
     }
+
     @Test
     public void setMaxLengthRandom() {
         int userMaxLength = 13;
@@ -39,7 +42,4 @@ class SetMaxLengthTest {
         int actual = manager.getMaxLength();
         assertEquals(expected, actual);
     }
-
-
 }
-

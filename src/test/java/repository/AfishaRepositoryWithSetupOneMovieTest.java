@@ -1,12 +1,13 @@
-package manager;
+package repository;
 
 import domain.ShowMoviesInfo;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
-public class MovieManagerEmptyWithUserArgsTest {
-    private MovieManager manager = new MovieManager(3);
+public class AfishaRepositoryWithSetupOneMovieTest {
+    private AfishaRepository repository = new AfishaRepository();
     private ShowMoviesInfo movie1 = new ShowMoviesInfo(1, 100500, "Бладшот", "боевик", "poster100500.jpg", false);
     private ShowMoviesInfo movie2 = new ShowMoviesInfo(2, 35584, "Вперед", "мультфильм", "poster35584.jpg", false);
     private ShowMoviesInfo movie3 = new ShowMoviesInfo(3, 158975, "Отель «Белград»", "комедия", "Poster158975", false);
@@ -19,31 +20,48 @@ public class MovieManagerEmptyWithUserArgsTest {
     private ShowMoviesInfo movie10 = new ShowMoviesInfo(10, 45561, "Тихое место-2", "ужасы", "Poster45561", true);
     private ShowMoviesInfo movie11 = new ShowMoviesInfo(11, 24852, "Гнев человеческий", "боевик", "Poster24852", true);
 
+    @BeforeEach
+    public void setupOneMovie() {
+        repository.save(movie5);
+    }
+
     @Test
-    void shouldAddMovieIfNoMovies() {
-        manager.addMovie(movie1);
-        ShowMoviesInfo[] actual = manager.showLatest();
-        ShowMoviesInfo[] expected = new ShowMoviesInfo[]{movie1};
+    public void shouldAddMovieIfOneMovie() {
+        repository.save(movie10);
+        ShowMoviesInfo[] actual = repository.getMovies();
+        ShowMoviesInfo[] expected = new ShowMoviesInfo[]{movie5, movie10};
         assertArrayEquals(expected, actual);
     }
 
     @Test
-    void shouldAddMovieIfOneMovie() {
-        manager.addMovie(movie3);
-        manager.addMovie(movie7);
-        ShowMoviesInfo[] actual = manager.showLatest();
-        ShowMoviesInfo[] expected = new ShowMoviesInfo[]{movie7, movie3};
+    public void shouldRemoveExistMovieIfOneMovie(){
+        repository.removeById(5);
+        ShowMoviesInfo[] actual = repository.getMovies();
+        ShowMoviesInfo[] expected = new ShowMoviesInfo[0];
+        assertArrayEquals(expected, actual);
+    }
+//    @Test
+//    public void shouldRemoveNotExistMovieIfOneMovie(){
+//        repository.removeById(6);
+//        ShowMoviesInfo[] actual = repository.getMovies();
+//        ShowMoviesInfo[] expected = new ShowMoviesInfo[]{movie5};
+//        assertArrayEquals(expected, actual);
+//
+//    }
+
+    @Test
+    void  shouldFindAllMoviesIfOneMovie() {
+        ShowMoviesInfo[] actual = repository.findAll();
+        ShowMoviesInfo[] expected = new ShowMoviesInfo[]{movie5};
         assertArrayEquals(expected, actual);
     }
 
     @Test
-    void shouldSetUserMoviesLength() {
-        manager.addMovie(movie1);
-        manager.addMovie(movie2);
-        manager.addMovie(movie3);
-        manager.addMovie(movie4);
-        ShowMoviesInfo[] actual = manager.showLatest();
-        ShowMoviesInfo[] expected = new ShowMoviesInfo[]{movie4, movie3, movie2};
+    void shouldRemoveAllIfOneMovie() {
+        repository.removeAll();
+        ShowMoviesInfo[] actual = repository.getMovies();
+        ShowMoviesInfo[] expected = new ShowMoviesInfo[]{};
         assertArrayEquals(expected, actual);
     }
 }
+
